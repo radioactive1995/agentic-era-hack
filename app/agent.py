@@ -26,28 +26,14 @@ os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "True")
 
 
 def get_weather(query: str) -> str:
-    """Simulates a web search. Use it get information on weather.
-
-    Args:
-        query: A string containing the location to get weather information for.
-
-    Returns:
-        A string with the simulated weather information for the queried location.
-    """
+    """Simulates a web search. Use it get information on weather."""
     if "sf" in query.lower() or "san francisco" in query.lower():
         return "It's 60 degrees and foggy."
     return "It's 90 degrees and sunny."
 
 
 def get_current_time(query: str) -> str:
-    """Simulates getting the current time for a city.
-
-    Args:
-        city: The name of the city to get the current time for.
-
-    Returns:
-        A string with the current time information.
-    """
+    """Simulates getting the current time for a city."""
     if "sf" in query.lower() or "san francisco" in query.lower():
         tz_identifier = "America/Los_Angeles"
     else:
@@ -58,9 +44,20 @@ def get_current_time(query: str) -> str:
     return f"The current time for query {query} is {now.strftime('%Y-%m-%d %H:%M:%S %Z%z')}"
 
 
+def add_integers(a: int, b: int) -> str:
+    """Adds two integers and returns the result as a string."""
+    result = a + b
+    return f"The result of adding {a} and {b} is {result}."
+
+def multiply_integers(a: int, b: int) -> str:
+    """Adds two integers and returns the result as a string."""
+    result = a * b
+    return f"The result of adding {a} and {b} is {result}."
+
+
 root_agent = Agent(
     name="root_agent",
     model="gemini-2.0-flash",
     instruction="You are a helpful AI assistant designed to provide accurate and useful information.",
-    tools=[get_weather, get_current_time],
+    tools=[get_weather, get_current_time, add_integers, multiply_integers],
 )
